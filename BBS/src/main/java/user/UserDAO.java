@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class UserDAO {
+public class UserDAO { // DB 접근하여 정보를 가져오는 class
 	
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -44,6 +44,25 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return -2; // DB 오류
+		
+	}
+	
+	public int join(User user) {
+		String SQL = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, user.getUserID());
+			pstmt.setString(2, user.getUserPassword());
+			pstmt.setString(3, user.getUserName());
+			pstmt.setString(4, user.getUserGender());
+			pstmt.setString(5, user.getUserEmail());
+			
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // DB 오류
 		
 	}
 	
