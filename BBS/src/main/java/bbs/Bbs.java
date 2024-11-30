@@ -26,6 +26,7 @@ public class Bbs {
 	}
 	public void setUserID(String userID) {
 		this.userID = userID;
+		System.out.println("Setting userID: " + userID); // 디버깅 로그 추가
 	}
 	public String getBbsDate() {
 		return bbsDate;
