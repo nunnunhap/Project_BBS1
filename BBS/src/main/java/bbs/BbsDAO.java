@@ -141,6 +141,36 @@ public class BbsDAO { // Data 접근 객체의 약자
 		}
 		return null;
 	}
+	
+	// 게시글 수정
+	public int update(int bbsID, String bbsTitle, String bbsContent) {
+		String SQL = "UPDATE BBS SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, bbsTitle);	
+			pstmt.setString(2, bbsContent);	
+			pstmt.setInt(3, bbsID);	
+			
+			return pstmt.executeUpdate(); // 성공 시 0 이상 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 오류 시
+	}
+	
+	// 게시글 삭제
+	public int delete(int bbsID) {
+		String SQL = "UPDATE BBS SET bbsAvailable = 0 WHERE bbsID = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsID);	
+			
+			return pstmt.executeUpdate(); // 성공 시 0 이상 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 오류 시
+	}
 
 	
 	
